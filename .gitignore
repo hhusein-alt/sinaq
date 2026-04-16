@@ -1,49 +1,19 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
+# sinaq project gitignore
 
-# Build
-.next/
-out/
-build/
-dist/
+# Ignore everything by default
+*
 
-# Environment
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Allow the sinaq directory and its contents
+!sinaq/
+!sinaq/**
 
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Exclude build artifacts and dependencies inside sinaq
+sinaq/node_modules/
+sinaq/.next/
+sinaq/out/
+sinaq/build/
+sinaq/.env*
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
-
-# Vercel
-.vercel
-
-# Local settings (not project config)
-.claude/settings.local.json
-
-# User-specific skills (not part of the template)
-.claude/skills/customize/
-.claude/skills/release/
-
-# Local temp files
-temp/
+# Allow these root files if they exist and are needed
+!.gitignore
+!README.md
