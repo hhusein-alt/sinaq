@@ -29,39 +29,39 @@ const FEATURES = [
 
 export default function PassportSection() {
   return (
-    <section className="bg-[#0B1221] py-24 border-t border-slate-800/60">
+    <section className="bg-[#0B1221] py-16 md:py-24 border-t border-slate-800/60 overflow-x-hidden">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           {/* ── Left: Text ── */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 md:gap-8">
             <div>
-              <p className="text-[#22c55e] text-xs font-bold tracking-[0.2em] uppercase mb-4">
+              <p className="text-[#22c55e] text-xs font-bold tracking-[0.2em] uppercase mb-3 md:mb-4">
                 Səriştə Pasportu
               </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight tracking-tight">
                 Sənin Rəqəmsal{' '}
                 <span className="text-[#22c55e]">Səriştə Pasportun</span>
               </h2>
             </div>
 
-            <p className="text-lg text-gray-300 leading-relaxed max-w-lg">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
               Simulyasiyaları bitir, real bacarıqlarını sübut et və QR-kodla paylaşılan beynəlxalq standartlı sertifikat qazan.
             </p>
 
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-3 md:gap-4">
               {FEATURES.map((f, i) => (
                 <li key={i} className="flex items-start gap-3">
                   {f.icon}
-                  <span className="text-gray-200 text-base">{f.text}</span>
+                  <span className="text-gray-200 text-sm md:text-base">{f.text}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="flex items-center gap-4 pt-2">
+            <div className="pt-1 md:pt-2">
               <Link
                 href="/simulations"
-                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/60 hover:bg-white/5 font-semibold py-3 px-8 rounded-full transition-all text-base"
+                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/60 hover:bg-white/5 font-semibold py-3 px-7 rounded-full transition-all text-sm md:text-base min-h-[48px]"
               >
                 Nümunəni Gör →
               </Link>
@@ -69,9 +69,9 @@ export default function PassportSection() {
           </div>
 
           {/* ── Right: 3D Rotating Passport Video ── */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mt-2 md:mt-0">
             <div
-              className="relative w-full max-w-md rounded-3xl overflow-hidden"
+              className="relative w-full max-w-xs sm:max-w-sm md:max-w-md rounded-3xl overflow-hidden"
               style={{ boxShadow: '0 0 50px rgba(34,197,94,0.15), 0 0 120px rgba(34,197,94,0.05)' }}
             >
               <video

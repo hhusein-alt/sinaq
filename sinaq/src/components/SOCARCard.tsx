@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Link from 'next/link';
 
 interface Props {
@@ -14,11 +14,10 @@ interface Props {
 
 export default function SOCARCard({ slug, company, title, category, duration, level }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
 
-  const handleMouseEnter = () => {
-    videoRef.current?.play().catch(() => {});
-  };
-
+  // Desktop: mouse hover play/pause
+  const handleMouseEnter = () => videoRef.current?.play().catch(() => {});
   const handleMouseLeave = () => {
     const v = videoRef.current;
     if (!v) return;
@@ -26,41 +25,66 @@ export default function SOCARCard({ slug, company, title, category, duration, le
     v.currentTime = 0;
   };
 
+  // Mobile: IntersectionObserver — play when card is 60% in viewport
+  useEffect(() => {
+    const video = videoRef.current;
+    const card = cardRef.current;
+    if (!video || !card) return;
+    if (!('ontouchstart' in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.style.opacity = '1';
+          video.play().catch(() => {});
+        } else {
+          video.style.opacity = '0';
+          video.pause();
+          video.currentTime = 0;
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Link
+      ref={cardRef}
       href={`/simulation/${slug}`}
-      className="bg-gradient-to-b from-[#1A2642] to-[#111A2E] rounded-xl overflow-hidden border border-slate-800 hover:border-slate-500 hover:shadow-lg hover:shadow-blue-900/20 transition-all cursor-pointer flex flex-col p-6 min-h-[300px] relative text-center group"
+      className="bg-gradient-to-b from-[#1A2642] to-[#111A2E] rounded-xl overflow-hidden border border-slate-800 hover:border-slate-500 hover:shadow-lg hover:shadow-blue-900/20 transition-all cursor-pointer flex flex-col p-6 min-h-[260px] md:min-h-[300px] relative text-center group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Static card shimmer — z-0 */}
+      {/* Static shimmer — z-0 */}
       <div className="h-16 w-full opacity-20 bg-gradient-to-br from-transparent to-white/5 absolute top-0 left-0 z-0" />
 
-      {/* Hover video — z-10, fades in on hover */}
+      {/* Hover video — z-10 */}
       <video
         ref={videoRef}
         src="/videos/card-socar-hover.mp4.mp4"
         muted
         loop
         playsInline
-        autoPlay
-        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+        className="absolute inset-0 w-full h-full object-cover z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       />
 
-      {/* AKTİV badge — z-20, always above video */}
+      {/* AKTİV badge — z-20 */}
       <div className="absolute top-3 left-3 z-20">
         <span className="bg-teal-600/20 text-teal-400 text-[9px] font-bold px-2 py-0.5 rounded tracking-wide border border-teal-800/40">
           AKTİV
         </span>
       </div>
 
-      {/* Text content — z-20, always above video */}
+      {/* Text content — z-20 */}
       <div className="flex-grow flex flex-col items-center justify-center relative z-20 mt-4">
         <span className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-3">{company}</span>
-        <h3 className="text-xl font-bold text-white leading-tight mb-4 group-hover:text-[#22c55e] transition-colors">{title}</h3>
+        <h3 className="text-lg md:text-xl font-bold text-white leading-tight mb-4 group-hover:text-[#22c55e] transition-colors">{title}</h3>
       </div>
 
-      {/* Footer — z-20, always above video */}
+      {/* Footer — z-20 */}
       <div className="mt-auto pt-4 border-t border-slate-700/50 relative z-20">
         <p className="text-xs text-gray-400 font-medium tracking-wide">
           {category} • {level} • {duration}

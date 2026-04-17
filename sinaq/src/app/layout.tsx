@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-dm-sans)]">
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-dm-sans)] overflow-x-hidden">
         {children}
       </body>
     </html>
