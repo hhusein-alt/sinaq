@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import KapitalBankCard from '@/components/KapitalBankCard';
+import SOCARCard from '@/components/SOCARCard';
 
 const SIMULATIONS = [
   {
@@ -163,42 +165,72 @@ export default function SimulationsPage() {
 
         {/* Grid */}
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-16">
-          {SIMULATIONS.map((sim) => (
-            <Link
-              key={sim.id}
-              href={sim.slug ? `/simulation/${sim.slug}` : '#'}
-              className="bg-gradient-to-b from-[#1A2642] to-[#111A2E] rounded-xl overflow-hidden border border-slate-800 hover:border-slate-500 hover:shadow-lg hover:shadow-blue-900/20 transition-all cursor-pointer flex flex-col p-6 min-h-[300px] relative text-center group"
-            >
-              {sim.badge && (
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="bg-purple-600/20 text-purple-400 text-[10px] font-bold px-2 py-1 rounded tracking-wide">
-                    {sim.badge}
-                  </span>
+          {SIMULATIONS.map((sim) => {
+            if (sim.id === 1 && sim.slug) {
+              return (
+                <KapitalBankCard
+                  key={sim.id}
+                  slug={sim.slug}
+                  company={sim.company}
+                  title={sim.title}
+                  category={sim.category}
+                  duration={sim.duration}
+                  level={sim.level}
+                />
+              );
+            }
+
+            if (sim.id === 2 && sim.slug) {
+              return (
+                <SOCARCard
+                  key={sim.id}
+                  slug={sim.slug}
+                  company={sim.company}
+                  title={sim.title}
+                  category={sim.category}
+                  duration={sim.duration}
+                  level={sim.level}
+                />
+              );
+            }
+
+            return (
+              <Link
+                key={sim.id}
+                href={sim.slug ? `/simulation/${sim.slug}` : '#'}
+                className="bg-gradient-to-b from-[#1A2642] to-[#111A2E] rounded-xl overflow-hidden border border-slate-800 hover:border-slate-500 hover:shadow-lg hover:shadow-blue-900/20 transition-all cursor-pointer flex flex-col p-6 min-h-[300px] relative text-center group"
+              >
+                {sim.badge && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="bg-purple-600/20 text-purple-400 text-[10px] font-bold px-2 py-1 rounded tracking-wide">
+                      {sim.badge}
+                    </span>
+                  </div>
+                )}
+
+                <div className="h-16 w-full opacity-20 bg-gradient-to-br from-transparent to-white/5 absolute top-0 left-0" />
+
+                {sim.slug && (
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="bg-teal-600/20 text-teal-400 text-[9px] font-bold px-2 py-0.5 rounded tracking-wide border border-teal-800/40">
+                      AKTİV
+                    </span>
+                  </div>
+                )}
+
+                <div className="flex-grow flex flex-col items-center justify-center relative z-10 mt-4">
+                  <span className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-3">{sim.company}</span>
+                  <h3 className="text-xl font-bold text-white leading-tight mb-4 group-hover:text-[#22c55e] transition-colors">{sim.title}</h3>
                 </div>
-              )}
 
-              <div className="h-16 w-full opacity-20 bg-gradient-to-br from-transparent to-white/5 absolute top-0 left-0" />
-
-              {sim.slug && (
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="bg-teal-600/20 text-teal-400 text-[9px] font-bold px-2 py-0.5 rounded tracking-wide border border-teal-800/40">
-                    AKTİV
-                  </span>
+                <div className="mt-auto pt-4 border-t border-slate-700/50 relative z-10">
+                  <p className="text-xs text-gray-400 font-medium tracking-wide">
+                    {sim.category} • {sim.level} • {sim.duration}
+                  </p>
                 </div>
-              )}
-
-              <div className="flex-grow flex flex-col items-center justify-center relative z-10 mt-4">
-                <span className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-3">{sim.company}</span>
-                <h3 className="text-xl font-bold text-white leading-tight mb-4 group-hover:text-[#22c55e] transition-colors">{sim.title}</h3>
-              </div>
-
-              <div className="mt-auto pt-4 border-t border-slate-700/50 relative z-10">
-                <p className="text-xs text-gray-400 font-medium tracking-wide">
-                  {sim.category} • {sim.level} • {sim.duration}
-                </p>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </section>
 
         {/* Bottom Information Cards */}

@@ -4,6 +4,7 @@ import LogoTicker from '@/components/LogoTicker';
 import ExploreSection from '@/components/ExploreSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import EmployersSection from '@/components/EmployersSection';
+import PassportSection from '@/components/PassportSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 
@@ -17,6 +18,7 @@ export default function Home() {
         <ExploreSection />
         <HowItWorksSection />
         <EmployersSection />
+        <PassportSection />
         <TestimonialsSection />
       </main>
       <Footer />
