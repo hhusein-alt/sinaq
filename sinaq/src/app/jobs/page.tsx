@@ -12,7 +12,7 @@ const JOBS = [
     location: "Bakı, Azərbaycan",
     deadline: "29 Aprel tarixində",
     badges: [
-      { text: "YAXINDA", type: "outline-orange" },
+      { text: "YAXINDA", type: "outline-green" },
       { text: "TƏDBİR", type: "filled-purple" }
     ]
   },
@@ -150,7 +150,7 @@ export default function JobsPage() {
                   <div className="flex gap-2">
                     {job.badges.map((badge, idx) => (
                       <span key={idx} className={`text-[10px] font-bold px-3 py-1 rounded ${
-                        badge.type === 'outline-orange' ? 'border border-orange-500 text-orange-400' :
+                        badge.type === 'outline-green' ? 'border border-[#22c55e] text-[#22c55e]' :
                         badge.type === 'filled-purple' ? 'bg-purple-600 text-white' :
                         badge.type === 'filled-teal' ? 'bg-teal-600/80 text-white' :
                         badge.type === 'filled-blue' ? 'bg-blue-600 text-white' : ''

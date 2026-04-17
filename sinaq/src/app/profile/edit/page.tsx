@@ -360,7 +360,7 @@ export default function EditProfilePage() {
                    <div className="border border-gray-200 rounded-xl p-6 mb-6 hover:shadow-md transition-shadow">
                      <div className="flex justify-between items-start mb-4">
                        <div className="flex items-center gap-4">
-                         <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center font-bold text-lg text-orange-500">
+                         <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center font-bold text-lg text-[#22c55e]">
                            PwC
                          </div>
                          <div>
